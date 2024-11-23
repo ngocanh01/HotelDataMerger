@@ -1,21 +1,35 @@
 ﻿using HotelDataMerger.Adapters;
 using HotelDataMerger.Factories;
 using HotelDataMerger.Models;
-using HotelDataMerger.Parsers;
 
 namespace HotelDataMerger.Services
 {
-	public class HotelService
+	public class HotelService : IHotelService
 	{
-		public async Task<List<Hotel>> GetHotelData(string url, string suppliername)
+		private readonly HotelAdapterFactory _adapterFactory;
+		private readonly List<ApiName> apiNames = Enum.GetValues(typeof(ApiName)).Cast<ApiName>().ToList();
+
+		public HotelService(HotelAdapterFactory adapterFactory)
 		{
-			IDataParser parser = ParserFactory.CreateParser(suppliername);
+			_adapterFactory = adapterFactory;
+		}
+		public async Task<List<Hotel>> GetHotelDataAsync()
+		{
+			List<Hotel> hotels = [];
+			foreach(var apiName in apiNames)
+			{
+				var adapter = _adapterFactory.CreateAdapter(apiName);
+				if (adapter == null)
+				{
+					Console.WriteLine("Adapter is null");
+					break;
+				}
 
-			string rawData = await parser.FetchRawData(url);
+				var hotelData = await adapter.ConvertToHotelAsync();
+				hotels.AddRange(hotelData);
+			}
 
-			IHotelAdapter adapter =  AdapterFactory.CreateAdapter(suppliername);
-
-			return await adapter.ConvertToHotel(rawData);
+			return MergeHotelListsWithFullData(hotels);
 		}
 
 		public List<Hotel> FilterHotels(List<Hotel> hotels, List<string> hotelIds, List<int> destinationIds)
@@ -33,12 +47,10 @@ namespace HotelDataMerger.Services
 			return hotels.Where(hotel => hotelIds.Contains(hotel.Id) && destinationIds.Contains(hotel.DestinationId)).OrderBy(hotel => hotel.DestinationId).ToList();
 		}
 
-		public List<Hotel> MergeHotelListsWithFullData(List<Hotel> list1, List<Hotel> list2, List<Hotel> list3)
+		public List<Hotel> MergeHotelListsWithFullData(List<Hotel> hotels)
 		{
-			// Concatenate all lists and group by unique hotel Id
-			var mergedHotels = list1
-				.Concat(list2)
-				.Concat(list3)
+			// Group hotel by unique Id
+			var mergedHotels = hotels
 				.GroupBy(hotel => hotel.Id)
 				.Select(group => MergeHotelGroup(group))
 				.ToList();

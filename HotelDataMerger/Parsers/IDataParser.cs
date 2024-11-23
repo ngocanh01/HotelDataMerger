@@ -2,6 +2,6 @@
 {
 	public interface IDataParser
 	{
-		Task<string> FetchRawData(string url);
+		Task<string> FetchRawDataAsync(string url);
 	}
 }

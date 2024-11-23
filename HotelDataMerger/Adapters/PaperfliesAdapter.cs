@@ -1,22 +1,20 @@
 ﻿using HotelDataMerger.Mappers;
 using HotelDataMerger.Models;
-using System.Text.Json;
+using HotelDataMerger.Parsers;
 
 namespace HotelDataMerger.Adapters
 {
-    public class PaperfliesAdapter : IHotelAdapter
+
+	public class PaperfliesAdapter(DataParser dataParser) : BaseAdapter<PaperfliesSupplier>(dataParser)
 	{
-		public async Task<List<Hotel>> ConvertToHotel(string rawData)
+		// Unique URL for Paperflies data
+		protected override string SupplierUrl => "https://5f2be0b4ffc88500167b85a0.mockapi.io/suppliers/paperflies";
+		public override ApiName ApiName => ApiName.Paperflies;
+
+		// Mapping function from PaperfliesSupplier to Hotel
+		protected override List<Hotel> MapToHotelResponseList(List<PaperfliesSupplier> suppliers)
 		{
-			var options = new JsonSerializerOptions
-			{
-				PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-				DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull
-			};
-
-			List<PaperfliesSupplier> hotels = JsonSerializer.Deserialize<List<PaperfliesSupplier>>(rawData, options);
-
-			return PaperfliesMapper.MapToHotelResponseList(hotels);
+			return PaperfliesMapper.MapToHotelResponseList(suppliers);
 		}
 	}
 }

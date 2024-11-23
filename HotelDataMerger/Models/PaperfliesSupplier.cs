@@ -2,7 +2,7 @@
 
 namespace HotelDataMerger.Models
 {
-	public class PaperfliesSupplier
+	public class PaperfliesSupplier : BaseSupplier
 	{
 		[JsonPropertyName("hotel_id")]
 		public string HotelId { get; set; }

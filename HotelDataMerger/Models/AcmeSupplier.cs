@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace HotelDataMerger.Models
 {
-	public class AcmeSupplier
+	public class AcmeSupplier : BaseSupplier
 	{
 		[JsonPropertyName("Id")]
 		public string Id { get; set; }

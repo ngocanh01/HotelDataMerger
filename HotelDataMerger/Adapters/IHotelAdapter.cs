@@ -4,6 +4,7 @@ namespace HotelDataMerger.Adapters
 {
 	public interface IHotelAdapter
 	{
-		Task<List<Hotel>> ConvertToHotel(string rawData);
+		ApiName ApiName { get; }
+		Task<List<Hotel>> ConvertToHotelAsync();
 	}
 }

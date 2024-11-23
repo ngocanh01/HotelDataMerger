@@ -2,7 +2,7 @@
 
 namespace HotelDataMerger.Models
 {
-	public class PatagoniaSupplier
+	public class PatagoniaSupplier : BaseSupplier
 	{
 		[JsonPropertyName("id")]
 		public string Id { get; set; }

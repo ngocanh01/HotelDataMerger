@@ -8,7 +8,7 @@
 		{
 			_httpClient = new HttpClient();
 		}
-		public async Task<string> FetchRawData(string url)
+		public async Task<string> FetchRawDataAsync(string url)
 		{
 			var response = await _httpClient.GetAsync(url);
 			response.EnsureSuccessStatusCode(); 
