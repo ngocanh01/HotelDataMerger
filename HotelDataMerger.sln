@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelDataMerger", "HotelDataMerger\HotelDataMerger.csproj", "{5D610D4D-D509-41DB-90AF-825B736AAA05}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5D610D4D-D509-41DB-90AF-825B736AAA05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D610D4D-D509-41DB-90AF-825B736AAA05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D610D4D-D509-41DB-90AF-825B736AAA05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D610D4D-D509-41DB-90AF-825B736AAA05}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C68037E3-CADE-47AF-AD80-84760B6334D8}
+	EndGlobalSection
+EndGlobal

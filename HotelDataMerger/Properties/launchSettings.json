@@ -1,0 +1,16 @@
+{
+  "profiles": {
+    "HotelDataMerger": {
+      "commandName": "Project",
+      "commandLineArgs": "iJhz 5432"
+    },
+    "Profile 1": {
+      "commandName": "Project",
+      "commandLineArgs": "iJhz,SjyX 5432",
+      "remoteDebugEnabled": false,
+      "jsWebView2Debugging": false,
+      "sqlDebugging": false,
+      "hotReloadEnabled": false
+    }
+  }
+}
