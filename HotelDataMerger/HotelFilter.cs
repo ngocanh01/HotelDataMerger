@@ -8,7 +8,7 @@ namespace HotelDataMerger
 		{
 			if (destinationIds == null && destinationIds == null)
 			{
-				return hotels;
+				return hotels.OrderBy(hotel => hotel.DestinationId).ToList();
 			}
 
 			if (hotelIds == null || destinationIds == null)
@@ -16,7 +16,7 @@ namespace HotelDataMerger
 				return new List<Hotel>();
 			}		
 
-			return hotels.Where(hotel => hotelIds.Contains(hotel.Id) &&	destinationIds.Contains(hotel.DestinationId)).ToList();
+			return hotels.Where(hotel => hotelIds.Contains(hotel.Id) &&	destinationIds.Contains(hotel.DestinationId)).OrderBy(hotel => hotel.DestinationId).ToList();
 		}
 	}
 }
