@@ -2,7 +2,7 @@
   "profiles": {
     "HotelDataMerger": {
       "commandName": "Project",
-      "commandLineArgs": "iJhz 5432"
+      "commandLineArgs": "none none\r\n"
     },
     "Profile 1": {
       "commandName": "Project",
