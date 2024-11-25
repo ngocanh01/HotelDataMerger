@@ -45,7 +45,7 @@ runner.bat "<hotel_ids>" "<destination_ids>"
 Example:
 ```bash
 runner.bat "iJhz,SjyX" "5432"
-runner.bat "iJhz" "none"
+runner.bat "none" "5432"
 runner.bat "none" "none"
 ```
 ### To execute the app with different arguments, modify the runner script in the root of the project.
