@@ -10,10 +10,12 @@
 		}
 		public async Task<string> FetchRawDataAsync(string url)
 		{
-			var response = await _httpClient.GetAsync(url);
-			response.EnsureSuccessStatusCode(); 
+            var response = await _httpClient.GetAsync(url);
+			response.StatusCode = System.Net.HttpStatusCode.BadRequest;
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)			
+				return string.Empty;			
 
-			return await response.Content.ReadAsStringAsync();
+            return await response.Content.ReadAsStringAsync();        
 		}
 	}
 }

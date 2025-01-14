@@ -28,9 +28,10 @@ public abstract class BaseAdapter<TSupplier> : IHotelAdapter
 	public async Task<List<Hotel>> ConvertToHotelAsync()
 	{
 		string rawData = await _dataParser.FetchRawDataAsync(SupplierUrl);
+		if (string.IsNullOrEmpty(rawData))		
+			return new List<Hotel>();		
 
 		List<TSupplier> supplierData = JsonSerializer.Deserialize<List<TSupplier>>(rawData, _jsonOptions) ?? new List<TSupplier>();
-
 		return MapToHotelResponseList(supplierData);
 	}
 }
