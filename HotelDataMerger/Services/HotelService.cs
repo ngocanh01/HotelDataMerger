@@ -1,5 +1,4 @@
-﻿using HotelDataMerger.Adapters;
-using HotelDataMerger.Factories;
+﻿using HotelDataMerger.Factories;
 using HotelDataMerger.Models;
 
 namespace HotelDataMerger.Services
@@ -16,7 +15,7 @@ namespace HotelDataMerger.Services
 		public async Task<List<Hotel>> GetHotelDataAsync()
 		{
 			List<Hotel> hotels = [];
-			foreach(var apiName in apiNames)
+			foreach (var apiName in apiNames)
 			{
 				var adapter = _adapterFactory.CreateAdapter(apiName);
 				if (adapter == null)
@@ -34,14 +33,19 @@ namespace HotelDataMerger.Services
 
 		public List<Hotel> FilterHotels(List<Hotel> hotels, List<string> hotelIds, List<int> destinationIds)
 		{
-			if (destinationIds == null && destinationIds == null)
+			if (hotelIds == null && destinationIds == null)
 			{
 				return hotels.OrderBy(hotel => hotel.DestinationId).ToList();
 			}
 
-			if (hotelIds == null || destinationIds == null)
+			if (hotelIds == null && destinationIds != null)
 			{
-				return new List<Hotel>();
+				return hotels.Where(hotel => destinationIds.Contains(hotel.DestinationId)).OrderBy(hotel => hotel.DestinationId).ToList();
+			}
+
+			if (hotelIds != null && destinationIds == null)
+			{
+				return hotels.Where(hotel => hotelIds.Contains(hotel.Id)).OrderBy(hotel => hotel.DestinationId).ToList();
 			}
 
 			return hotels.Where(hotel => hotelIds.Contains(hotel.Id) && destinationIds.Contains(hotel.DestinationId)).OrderBy(hotel => hotel.DestinationId).ToList();
